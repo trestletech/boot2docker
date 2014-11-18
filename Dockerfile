@@ -218,6 +218,9 @@ RUN echo root > $ROOTFS/etc/sysconfig/superuser
 # Copy boot params
 COPY  rootfs/isolinux /tmp/iso/boot/isolinux
 
+# lvcreate looks for blkid in the wrong place
+RUN ln -s /sbin/blkid $ROOTFS/usr/local/sbin/blkid
+
 COPY rootfs/make_iso.sh /
 
 RUN /make_iso.sh
