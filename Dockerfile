@@ -48,17 +48,6 @@ RUN jobs=$(nproc); \
 
 ENV ROOTFS          /rootfs
 ENV TCL_REPO_BASE   http://tinycorelinux.net/5.x/x86
-ENV TCZ_DEPS        iptables \
-                    iproute2 \
-                    openssh openssl-1.0.0 \
-                    tar \
-                    gcc_libs \
-                    lvm2 \
-                    acpid \
-                    xz liblzma \
-                    git expat2 libiconv libidn libgpg-error libgcrypt libssh2 \
-                    nfs-utils tcp_wrappers portmap rpcbind libtirpc \
-                    curl ntpclient
 
 # Make the ROOTFS
 RUN mkdir -p $ROOTFS
@@ -111,6 +100,25 @@ RUN cp -v /linux-kernel/arch/x86_64/boot/bzImage /tmp/iso/boot/vmlinuz64
 
 # Download the rootfs, don't unpack it though:
 RUN curl -L -o /tcl_rootfs.gz $TCL_REPO_BASE/release/distribution_files/rootfs.gz
+
+
+ENV TCZ_DEPS        iptables \
+                    iproute2 \
+                    openssh openssl-1.0.0 \
+                    tar \
+                    gcc_libs \
+                    liblvm2 \
+                    ncurses \
+                    raid-dm-2.6.33.3-tinycore64 \
+                    readline \
+                    udev-lib \
+                    lvm2 \
+                    libdevmapper \
+                    acpid \
+                    xz liblzma \
+                    git expat2 libiconv libidn libgpg-error libgcrypt libssh2 \
+                    nfs-utils tcp_wrappers portmap rpcbind libtirpc \
+                    curl ntpclient
 
 # Install the TCZ dependencies
 RUN for dep in $TCZ_DEPS; do \
