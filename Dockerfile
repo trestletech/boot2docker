@@ -53,6 +53,7 @@ ENV TCZ_DEPS        iptables \
                     openssh openssl-1.0.0 \
                     tar \
                     gcc_libs \
+                    lvm2 \
                     acpid \
                     xz liblzma \
                     git expat2 libiconv libidn libgpg-error libgcrypt libssh2 \
