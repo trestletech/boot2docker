@@ -77,3 +77,6 @@ fi
 if modprobe hv_utils &> /dev/null; then
     /usr/sbin/hv_kvp_daemon
 fi
+
+# Activate any available vgs
+vgchange -a y
