@@ -6,6 +6,9 @@
 # Load TCE extensions
 /etc/rc.d/tce-loader
 
+# Activate any available vgs
+vgchange -a y
+
 # Automount a hard drive
 /etc/rc.d/automount
 
@@ -78,5 +81,3 @@ if modprobe hv_utils &> /dev/null; then
     /usr/sbin/hv_kvp_daemon
 fi
 
-# Activate any available vgs
-vgchange -a y

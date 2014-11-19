@@ -4,7 +4,7 @@ LABEL=boot2docker-data
 MAGIC="boot2docker, please format-me"
 
 # If there is a partition with `boot2docker-data` as its label, use it and be
-# very happy. Thus, you can come along if you feel like a room without a roof.
+# very happy. Thus, you can clap along if you feel like a room without a roof.
 BOOT2DOCKER_DATA=`blkid -o device -l -t LABEL=$LABEL`
 echo $BOOT2DOCKER_DATA
 if [ ! -n "$BOOT2DOCKER_DATA" ]; then
@@ -31,7 +31,15 @@ if [ ! -n "$BOOT2DOCKER_DATA" ]; then
             # Add the data partition
             (echo n; echo p; echo 1; echo ; echo ; echo w) | fdisk $UNPARTITIONED_HD
             BOOT2DOCKER_DATA=`echo "${UNPARTITIONED_HD}1"`
-            mkfs.ext4 -L $LABEL $BOOT2DOCKER_DATA
+
+            VOLNAME="lvol1"
+
+            # Add a layer of lvm
+            pvcreate $BOOT2DOCKER_DATA
+            vgcreate vg1 $BOOT2DOCKER_DATA
+            lvcreate -l 80%VG -n $VOLNAME vg1
+
+            mkfs.ext4 -L $LABEL /dev/vg1/$VOLNAME
             swapon "${UNPARTITIONED_HD}2"
         fi
     else
