@@ -23,14 +23,14 @@ tclVersion="$(cat $ROOTFS/usr/share/doc/tc/release.txt)" # something like "5.3"
 cat > $ROOTFS/etc/os-release <<-EOOS
 NAME=Boot2Docker
 VERSION=$b2dVersion
-ID=boot2docker
+ID=connect2docker
 ID_LIKE=tcl
 VERSION_ID=$b2dVersion
 PRETTY_NAME="Boot2Docker $b2dVersion (TCL $tclVersion); $b2dDetail"
 ANSI_COLOR="1;34"
-HOME_URL="http://boot2docker.io"
-SUPPORT_URL="https://github.com/boot2docker/boot2docker"
-BUG_REPORT_URL="https://github.com/boot2docker/boot2docker/issues"
+HOME_URL="http://rstudio.com"
+SUPPORT_URL="support.rstudio.com"
+BUG_REPORT_URL="support.rstudio.com"
 EOOS
 
 # Pack the rootfs
